@@ -107,7 +107,7 @@ with st.sidebar:
     category = st.sidebar.selectbox("Category", ["business", "entertainment", "general", "health", "science", "sports", "technology"], index=0)
 
     st.sidebar.subheader("Mood")
-    mood = st.sidebar.selectbox("Mood", ["happy", "good", "normal", "neutral", "sad", "angry"], index=0)
+    mood = st.sidebar.selectbox("Mood", ["happy", "good", "normal", "sad", "angry"], index=0)
 
     st.info('This is a news assistant that helps you to get relevant news classified by emotions. It uses the latest NLP and ML techniques to classify the news articles into different emotions.')
     st.caption('Made with ❤️ by SkillDeti team.')
