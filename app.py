@@ -119,16 +119,31 @@ news_df = news_df[news_df['emotion'] == mood]
 if news_df is not None:
     st.write('Total Articles:', len(news_df))
 
-    if news_df is not None:
-        for index, row in news_df.iterrows():
-            st.write('---')
-            col1, col2 = st.columns([1, 4])
-            with col1:
+    if len(news_df) == 0: st.warning('No articles found.')
+
+    colA, colB = st.columns([3, 5])
+    
+    with colA:
+        if news_df is not None:
+            for index, row in news_df.head(1).iterrows():
+                st.write('---')
                 st.image(row['imgUrl'] if row['imgUrl'] else 'media/logo.png', use_column_width=True)
-            with col2:
                 st.write(f"**Title:** {row['title']}")
                 st.write(f"**Content:** {row['content']}")
                 st.write(f"**URL:** {row['url']}")
                 st.write(f"**Emotion:** {get_emoji[row['emotion']]} {row['emotion']} ({row['score']})")
+    with colB:
+        if news_df is not None:
+            for idx, (index, row) in enumerate(news_df.iterrows()):
+                if idx == 0: continue
+                st.write('---')
+                col1, col2 = st.columns([1, 4])
+                with col1:
+                    st.image(row['imgUrl'] if row['imgUrl'] else 'media/logo.png', use_column_width=True)
+                with col2:
+                    st.write(f"**Title:** {row['title']}")
+                    st.write(f"**Content:** {row['content']}")
+                    st.write(f"**URL:** {row['url']}")
+                    st.write(f"**Emotion:** {get_emoji[row['emotion']]} {row['emotion']} ({row['score']})")
 else:
     st.warning('No articles found.')
